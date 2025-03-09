@@ -20,6 +20,7 @@
     }
 
     .register-container {
+      margin-top: 50px;
       min-height: 100vh;
       display: flex;
       align-items: center;
@@ -71,7 +72,6 @@
     <div class="col-lg-6">
       <div class="register-box">
         <h2 class="form-title">Đăng ký tài khoản</h2>
-
         <!-- Hiển thị thông báo lỗi -->
         <% String errorMessage = (String) request.getAttribute("errorMessage"); %>
         <% if (errorMessage != null) { %>
