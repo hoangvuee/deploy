@@ -62,7 +62,7 @@ public class Manage_addProduct extends HttpServlet {
             }
 
             // Chuyển hướng sau khi thành công
-            resp.sendRedirect("getCategory");
+            resp.sendRedirect("../getCategory");
         } catch (Exception e) {
             e.printStackTrace();
             resp.getWriter().println("Có lỗi xảy ra: " + e.getMessage());
