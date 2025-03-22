@@ -17,8 +17,9 @@ public class Signout extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         HttpSession session = req.getSession(false);
         if (session != null) {
-            session.invalidate();
+            session.removeAttribute("userInfor"); // Xóa user info khỏi session
+            session.invalidate(); // Hủy session
         }
-        resp.sendRedirect("setupData");
+        resp.sendRedirect("Account/clear_token.jsp");
     }
 }
