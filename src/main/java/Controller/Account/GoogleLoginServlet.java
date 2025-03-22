@@ -2,6 +2,7 @@ package Controller.Account;
 
 import Dao.UserDao;
 import Models.User.User;
+import Sercurity.JwtUtil;
 import Services.ServiceRole;
 import Services.ServiceUser;
 import jakarta.servlet.ServletException;
@@ -24,8 +25,10 @@ public class GoogleLoginServlet extends HttpServlet {
     ServiceUser serviceUser = new ServiceUser();
     ServiceRole serviceRole = new ServiceRole();
 
+
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String accessToken = request.getParameter("access_token");
+        System.out.println("Received access_token: " + accessToken);
 
         if (accessToken == null || accessToken.isEmpty()) {
             response.sendRedirect("Account/login.jsp?error=Login failed");
@@ -53,6 +56,7 @@ public class GoogleLoginServlet extends HttpServlet {
 
         UserDao userDAO = new UserDao();
         User user = userDAO.getUserByEmail(email);
+        System.out.println(user.toString());
 
         if (user == null) {
             user = new User(email, name, picture, 2);
@@ -64,6 +68,14 @@ public class GoogleLoginServlet extends HttpServlet {
         session.setAttribute("idUser", user.getId());
         session.setAttribute("idRole", user.getIdRole());
         session.setAttribute("nameRole", serviceRole.getRoleNameById(user.getIdRole()));
+        System.out.println(user.getIdRole());
+
+        String jwtToken = JwtUtil.generateToken(email,serviceRole.getRoleNameById(user.getIdRole()));
+        session.setAttribute("authToken", jwtToken);
+        System.out.println(jwtToken);
+
+
+
 
         response.setContentType("application/json");
         response.getWriter().write("{\"status\": \"success\"}");
