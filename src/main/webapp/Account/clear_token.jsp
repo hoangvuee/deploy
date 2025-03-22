@@ -17,7 +17,9 @@
 <script>
     window.onload = function () {
         // Xóa access_token khỏi URL bằng cách chuyển hướng về login.jsp
+        sessionStorage.removeItem("token_sent");
         window.location.replace("login.jsp");
+
     };
 </script>
 </html>
