@@ -111,7 +111,12 @@ public class ServiceUser {
         return Base64.getUrlEncoder().withoutPadding().encodeToString(bytes).substring(0, 10);
     }
     public boolean checkCredentials(String email, String password) {
-        return userDao.checkCredentials(email,password);
+
+            return userDao.checkCredentials(email,password);
+
+
+
+
     }
     public int checkRole(String email, String pass) throws SQLException {
 
@@ -165,6 +170,10 @@ public class ServiceUser {
         }
         return false;
     }
+    public String getUserAvatar(int idUser) {
+        return userDao.getUserAvatar(idUser);
+    }
+
     public static void main(String[] args) throws SQLException {
         ServiceUser s  = new ServiceUser();
         System.out.println(s.check("jane.doe@example.com","password456"));
