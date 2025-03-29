@@ -279,7 +279,320 @@
             </ul>
         </div>
     </div>
+    <div class="container mt-4">
+        <!-- Tabs -->
+        <ul class="nav nav-tabs" id="productTabs" >
+            <li class="nav-item">
+                <a class="nav-link active" data-bs-toggle="tab" href="#mo-ta">Mô tả</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" data-bs-toggle="tab" href="#danh-gia">Đánh giá (14)</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" data-bs-toggle="tab" href="#van-chuyen">Vận chuyển</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" data-bs-toggle="tab" href="#ve-nam-xanh">Về Nấm Xanh</a>
+            </li>
+        </ul>
+    <div class="tab-content mt-3">
+        <!-- Tab Mô Tả -->
+        <div class="tab-pane fade show active" id="mo-ta">
+            <div class="container mt-5" id="des0">
+                <h5 class="fw-bold" style="color: #B0501D;">Thông tin Nấm Đùi Gà Tươi</h5>
+                <p>Nấm Đùi Gà Tươi là nấm ăn thông dụng với vị ngon ngọt bùi, phần thịt nấm săn chắc nên ăn rất thú vị. Loại nấm này có thể dùng trong cả món chay và món mặn, cách chế biến cũng dễ dàng, các món thường thấy như nấm nướng mỡ hành/phô mai, thả lẩu, xào xả ớt, nấu canh,…
+                    Nấm Đùi Gà Tươi rất giàu dinh dưỡng cho cơ thể tiếp thu, từ đó giúp hỗ trợ hệ tiêu hóa đường ruột, giảm tiểu đường và huyết áp, kích thích vị giác hiệu quả.</p>
 
+                <table class="table table-bordered">
+                    <tbody>
+                    <tr>
+                        <td><strong>Giá nấm lẻ</strong></td>
+                        <td>165.000 VND/kg</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Xuất xứ</strong></td>
+                        <td>Nông Trại Nấm Xanh Việt Nam</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Đóng gói</strong></td>
+                        <td>Công ty TNHH Agrikgai</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Quy cách</strong></td>
+                        <td>200gr, 500gr, 1kg</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Ngày sản xuất</strong></td>
+                        <td>In trên bao bì (nấm mới mỗi ngày)</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Hạn sử dụng</strong></td>
+                        <td>07 ngày (từ ngày sản xuất)</td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="container mt-5" id="des1">
+                <!-- Trang 1 -->
+                <h2 class="text-center text-danger">Ưu điểm của Nấm Kim Châm Hàn Quốc Tươi</h2>
+                <div class="text-center">
+                    <img src="image/1735387762935_nam-bao-ngu-xam-tuoi-06.jpg" class="img-fluid" alt="Nấm Kim Châm" width="40%">
+                </div>
+                <ul class="mt-4">
+                    <li>Nấm Kim Châm Hàn Quốc tươi là loại nấm có khá nhiều vitamin, chất xơ, protid, lipid và các loại axit amin.</li>
+                    <li>Có các khoáng chất hữu ích, gồm cả Ergothioneine là một chất chống oxy hóa hữu dụng.</li>
+                    <li>Là <span class="text-danger">thực phẩm ít calo</span>, phù hợp cho chị em phụ nữ ăn kiêng, giữ dáng.</li>
+                    <li>Giàu giá trị dinh dưỡng hơn thịt, cá, trứng và sữa.</li>
+                    <li>Dễ chế biến, phù hợp với nhiều món ăn chay và mặn.</li>
+                </ul>
+                <p class="fst-italic">*Axit amin không thể tự tổng hợp là phải ăn mới dung nạp được chứ cơ thể không tự sinh.</p>
+            </div>
+
+            <div class="container mt-5" id="des2">
+                <!-- Trang 2 -->
+                <h2 class="text-center text-danger">Hàm lượng dinh dưỡng trong Nấm Kim Châm Hàn Quốc tươi</h2>
+                <div class="text-center">
+                    <img src="image/1735387762935_nam-bao-ngu-xam-tuoi-06.jpg" class="img-fluid" alt="Nấm Kim Châm"  width="40%">
+                </div>
+                <ul class="mt-4">
+                    <li>Chứa nhiều vitamin C, E, PP, và nhóm vitamin B (B1, B2, B6, B12...).</li>
+                    <li>Nhiều Protein, Lipid và các khoáng chất (kẽm, kali,...).</li>
+                    <li>Thực phẩm có nhiều chất xơ hơn một số loại rau củ.</li>
+                    <li>Chứa 16 loại axit amin, gồm 8 loại cơ thể không thể tự tổng hợp.</li>
+                    <li>Có Flammutoxin giúp tăng cường hấp thụ chất.</li>
+                </ul>
+                <h3 class="mt-4 text-danger">Cách sử dụng Nấm Kim Châm Hàn Quốc</h3>
+                <h4 class="mt-3">Cách sơ chế nấm tươi</h4>
+                <ul>
+                    <li>Dùng kéo/dao bén cắt nhẹ phần gốc nấm khoảng 2cm.</li>
+                    <li>Rửa sơ với nước bằng cách bỏ vào thau nước rồi chà nhẹ.</li>
+                    <li>Tách lẻ thành từng chùm nhỏ hoặc từng cây nấm đơn lẻ.</li>
+                </ul>
+                <h4 class="mt-3 text-danger">Lưu ý khi sơ chế</h4>
+                <p>Nấm rất dễ hút nước, không nên rửa hoặc ngâm trong nước quá lâu.</p>
+                <p>Nấm đã sạch, hạn chế hoặc không nên bóp muối vì sẽ làm nấm mất đi vị ngon ngọt tự nhiên.</p>
+            </div>
+            <div class="container mt-5" id="des3">
+                <!-- Trang 2 -->
+                <h2 class="text-danger">Cách chế biến Nấm Kim Châm Hàn Quốc Tươi</h2>
+                <div class="text-center">
+                    <img src="image/1735387762935_nam-bao-ngu-xam-tuoi-06.jpg" class="img-fluid" alt="Nấm Kim Châm"  width="40%">
+                </div>
+                <p>Có khá nhiều cách chế biến Nấm Kim Châm ngon để sử dụng rất đơn giản, như bạn có thể làm các món xào, canh, cháo hoặc kết hợp các món nướng với thịt… sẽ cực kỳ thơm ngon, chay mặn đều được.</p>
+                <h4 class="mt-3">Một số gợi ý bạn làm những món ngon như:</h4>
+                <ul class="mt-4">
+                    <li>Nấm xào trứng/cà chua/chay</li>
+                    <li>Canh rong biển Kim Châm</li>
+                    <li>Bò cuộn Kim Châm</li>
+                    <li>Nấm trộn cay</li>
+                    <li>Nấm sốt đậu</li>
+                </ul>
+                <h3 class="mt-4 text-danger">Tác dụng của Nấm Kim Châm Hàn Quốc Tươi</h3>
+                <ul>
+                    <li>Điều hòa hệ miễn dịch và tăng cường sức đề kháng hiệu quả nhờ lượng Protein.</li>
+                    <li>Cải thiện trí nhớ ở người lớn tuổi và tăng cường trí nhớ ở trẻ nhỏ nhờ có nhiều Lysin và Kẽm.</li>
+                    <li>Điều hòa huyết áp (giảm với người hay tăng huyết áp).</li>
+                </ul>
+                <h4 class="mt-3 text-danger">Cách bảo quản Nấm Kim Châm Hàn Quốc Tươi</h4>
+                <p>Khi bạn mua về, nếu đã cắt bịch ra rồi thì bạn nên dùng ngay trong ngày là ngon nhất. Nếu chưa dùng nấm ngay bạn nên để nguyên trong túi/khay và cho vào tủ lạnh ở ngăn mát hoặc tủ mát từ 3-5 độ C sẽ bảo quản được lên tới 15 ngày, tốt nhất bạn nên dùng trong 3-5 ngày đầu để đảm bảo độ tươi ngọt tự nhiên của nấm..</p>
+                <p>Khi lấy nấm ra để chế biến nhưng dùng không hết, nếu chưa ngâm nước bạn có thể cho phần nấm vào lại túi và bỏ lại vô tủ lạnh. Nếu đã ngâm/rửa nước bạn nên dùng hết cho chế biến để nấm không bị nhũn nấm. Còn khi đã chế biến mà ăn không hết, bạn có thể gói nấm vào giấy bạc và cho vào tủ lạnh, hôm sau hâm nóng lại dùng.</p>
+                <h4 class="mt-3 text-danger">Mua Nấm Kim Châm Hàn Quốc tươi ở đâu?</h4>
+                <p>Bạn có thể đặt Nấm Kim Châm Hàn Quốc Tươi cùng nhiều loại nấm tươi khác qua các Kênh Bán Lẻ của Nấm Xanh. Bao gồm đặt ngay trên website này, đặt nhanh qua các kênh chat (ZaloOA, Zalo/Hotline 0868032463, Fanpage), đặt từ nền tảng TMĐT có giao Hỏa Tốc (Lazada, Shopee, TikiNGON, ShopeeFood, GrabMart) và TiktokShop..</p>
+                <p>Nếu bạn muốn ghé tận nơi, có thể tìm Store Nấm Xanh trên Google Maps nha. Do sản lượng nấm mỗi ngày Nấm Xanh xuất kho đến các đối tác hệ thống siêu thị, nhà hàng, chuỗi ẩm thực, nhà máy,… là rất lớn. Nên bạn có thể đặt trước, hoặc gọi trước khi đến để đảm bảo còn hàng loại nấm bạn cần.</p>
+                <h4 class="mt-3 text-danger">Mua hàng tại Nấm Xanh có an tâm?</h4>
+                <p>Ở mỗi nông trại, chúng tôi đều đạt các chứng nhận VSATTP, gồm VietGAP tại một số vùng. Tại cơ sở sản xuất, chúng tôi cũng có những chứng nhận VSATTP, gồm HACCP. Bên cạnh đó, mỗi năm 2 lần chúng tôi luôn định kỳ kiểm nghiệm lại sản phẩm.</p>
+                <div style="padding: 0;margin: 0;">
+                    <img src="image/giay-chung-nhan-4tieu-chua-vsattp-haccp-ngang-1400px.jpg" alt="">
+                </div>
+                <p>Khi kết hợp với các nhà máy sản xuất, Nấm Xanh cũng đều ưu tiên chọn lựa những đơn vị uy tín và đủ chứng nhận, có danh mục sản xuất chất lượng và lịch sử gia công cho các đơn vị lớn. Do đó, bạn hãy an tâm khi mua hàng tại Nấm Xanh.</p>
+                <p class="text-center"><b >CẢM ƠN BẠN VÌ ĐÃ QUAN TÂM ĐẾN SẢN PHẨM CỦA NẤM XANH</b></p>
+            </div>
+
+
+
+        </div>
+
+        <!-- Tab Đánh Giá -->
+        <div class="tab-pane fade" id="danh-gia">
+            <h5 class="fw-bold">Đánh giá sản phẩm</h5>
+            <div class="container mt-4">
+                <div class="row">
+                    <!-- Cột đánh giá trung bình -->
+                    <div class="col-md-3 text-center">
+                        <h2 class="text-warning fw-bold">5.0 <i class="fas fa-star"></i></h2>
+                        <p class="fw-bold">ĐÁNH GIÁ TRUNG BÌNH</p>
+                    </div>
+
+                    <!-- Cột chi tiết đánh giá -->
+                    <div class="col-md-6">
+                        <!-- Dòng đánh giá 5 sao -->
+                        <div class="d-flex align-items-center">
+                            <span class="fw-bold">5 <i class="fas fa-star star"></i></span>
+                            <div class="flex-grow-1 mx-2 rating-bar">
+                                <div class="rating-fill" style="width: 100%;"></div>
+                            </div>
+                            <span class="text-primary fw-bold">100% | 16 đánh giá</span>
+                        </div>
+                        <!-- Các dòng còn lại -->
+                        <div class="d-flex align-items-center">
+                            <span class="fw-bold">4 <i class="fas fa-star"></i></span>
+                            <div class="flex-grow-1 mx-2 rating-bar">
+                                <div class="rating-fill" style="width: 0%;"></div>
+                            </div>
+                            <span class="text-primary">0% | 0 đánh giá</span>
+                        </div>
+                        <div class="d-flex align-items-center">
+                            <span class="fw-bold">3 <i class="fas fa-star"></i></span>
+                            <div class="flex-grow-1 mx-2 rating-bar">
+                                <div class="rating-fill" style="width: 0%;"></div>
+                            </div>
+                            <span class="text-primary">0% | 0 đánh giá</span>
+                        </div>
+                        <div class="d-flex align-items-center">
+                            <span class="fw-bold">2 <i class="fas fa-star"></i></span>
+                            <div class="flex-grow-1 mx-2 rating-bar">
+                                <div class="rating-fill" style="width: 0%;"></div>
+                            </div>
+                            <span class="text-primary">0% | 0 đánh giá</span>
+                        </div>
+                        <div class="d-flex align-items-center">
+                            <span class="fw-bold">1 <i class="fas fa-star"></i></span>
+                            <div class="flex-grow-1 mx-2 rating-bar">
+                                <div class="rating-fill" style="width: 0%;"></div>
+                            </div>
+                            <span class="text-primary">0% | 0 đánh giá</span>
+                        </div>
+
+                    </div>
+
+                    <!-- Cột nút đánh giá -->
+                    <div class="col-md-3 text-center">
+                        <button class="btn btn-primary">ĐÁNH GIÁ NGAY</button>
+                    </div>
+                </div>
+                <hr>
+                <div class="container mt-4" id="review">
+                    <div class="review-item" id="review-list">
+                        <p class="review-name">Lệ An Anh 036667***
+                            <span class="verified-badge">
+                                    <i class="fas fa-check-circle"></i> Đã mua hàng tại Nấm Xanh
+                                </span>
+                        </p>
+                        <p class="text-warning">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                        </p>
+                        <p class="review-text">Lần đầu trải nghiệm mua nấm online, cảm tình là tư vấn tận tình, lịch sự, giao nhanh đúng đủ. Sản phẩm thì ổn, mới và ngon...</p>
+                        <div class="review-actions">
+                            <i class="far fa-thumbs-up"></i> 0
+                            <i class="far fa-thumbs-down"></i> 0
+                            <a href="#">Trả lời</a>
+                            <a href="#">2 thích</a>
+                            <span>• 02/05/2024</span>
+                        </div>
+                    </div>
+
+                    <div class="review-item" id="review-list">
+                        <p class="review-name">Chu Han 0397997*** <span class="verified-badge"><i class="fas fa-check-circle"></i> Đã mua hàng tại Nấm Xanh</span></p>
+                        <p class="text-warning">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                        </p>
+                        <p class="review-text">Nấm ngon và tươi mới như mô tả, shop tư vấn nhiệt tình, ưng ý sẽ quay lại</p>
+                        <div class="review-tags">
+                            <span>Đóng gói chỉnh chu</span>
+                            <span>Nấm trông ngon sạch</span>
+                            <span>Hỗ trợ nhanh chóng</span>
+                            <span>Tư vấn nhiệt tình</span>
+                            <span>Shipper rất thân thiện</span>
+                            <span>Giao hàng nhanh chóng</span>
+                        </div>
+                        <div class="review-actions">
+                            <i class="far fa-thumbs-up"></i> 0
+                            <i class="far fa-thumbs-down"></i> 0
+                            <a href="#">Trả lời</a>
+                            <a href="#">3 thích</a>
+                            <span>• 05/03/2024</span>
+                        </div>
+                    </div>
+
+                    <div class="review-item">
+                        <p class="review-name">Tâm NTM 0337786*** <span class="verified-badge"><i class="fas fa-check-circle"></i> Đã mua hàng tại Nấm Xanh</span></p>
+                        <p class="text-warning">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                        </p>
+                        <p class="review-text">Nấm tươi ngon mới, đóng gói đẹp, ưng</p>
+                        <div class="review-tags">
+                            <span>Đóng gói chỉnh chu</span>
+                            <span>Giao nhanh chóng</span>
+                        </div>
+                        <div class="review-actions">
+                            <i class="far fa-thumbs-up"></i> 0
+                            <i class="far fa-thumbs-down"></i> 0
+                            <a href="#">Trả lời</a>
+                            <a href="#">3 thích</a>
+                            <span>• 29/10/2023</span>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+
+        <!-- Tab Vận Chuyển -->
+        <div class="tab-pane fade" id="van-chuyen">
+            <h5 class="fw-bold">Thông tin vận chuyển</h5>
+            <div class="container">
+                <div class="delivery-container row">
+                    <div class="col-md-6 text-center">
+                        <img src="image/hinh-thuc-giao-hang-nong-trai-nam-xanh-800px.jpg" alt="Shipper" class="img-fluid">
+                    </div>
+                    <div class="col-md-6 delivery-text">
+                        <h5>Các đơn hàng <span class="text-primary">Nội Thành TP HCM</span> sẽ được giao bởi:</h5>
+                        <ul>
+                            <li>Shipper Nấm Xanh (D+1), tức hôm nay khách đặt mai Nấm Xanh giao, với phí vận chuyển là 35.000đ đồng giá cho đơn dưới 500K (Freeship đơn từ 500K), hoặc theo khu vực KH nếu gần với Kho Nấm Xanh Q12 sẽ tính giá theo các đơn vị Hỏa Tốc, có thể rẻ hơn.</li>
+                            <li>Shipper Grab/Ahamove/Be/... tức giao gấp 2h-4h theo yêu cầu của khách hàng, phí vận chuyển sẽ tính thực tế tại thời điểm giao hàng hiện trên ứng dụng (có thể gồm voucher và trợ giá từ Nấm Xanh). KH cũng có thể chủ động book shipper ghé Kho Nấm Xanh lấy hàng. Nấm Tươi sẽ ưu tiên book giao trong 2 giờ, Nấm Khô ưu tiên book giao trong 4 giờ.</li>
+                        </ul>
+                        <h5>Các đơn hàng <span class="text-primary">Ngoại Thành HCM</span></h5>
+                        <ul>
+                            <li>Các đơn hàng Ngoại Thành HCM có phí vận chuyển là 35.000đ đồng giá cho đơn dưới 1 triệu (Freeship đơn từ 1 triệu), đã gồm trợ giá nếu phí thực tế cao hơn. Giao chủ yếu bởi SPX (Shopee Express), GHTK (GiaoHangTietKiem) khắp cả nước. Giao được sản phẩm Nấm Khô, Bột Nấm, Nấm Dược.</li>
+                            <li>Nấm Xanh không hỗ trợ giao Nấm Tươi ngoài TP HCM, nếu KH ở các tỉnh kề cận TP HCM và có quen chành xe, giao hàng trong 1 ngày, Nấm Tươi sẽ được đóng thùng xốp, chèn gel lạnh để giao chành. Phí vận chuyển sẽ gồm phí chành xe báo, phí thùng xốp & gel lạnh,... (Nấm Xanh sẽ hỗ trợ 1 phần) và KH buộc phải thanh toán chuyển khoản trước 100%.</li>
+                        </ul>
+                        <p><strong>Nấm Xanh</strong> hỗ trợ giao hàng Tỉnh nếu có quen xe.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Tab Về Nấm Xanh -->
+        <div class="tab-pane fade" id="ve-nam-xanh">
+            <h5 class="fw-bold">Giới thiệu về Nấm Xanh</h5>
+            <div class="container content-section">
+                <div class="row align-items-center">
+                    <div class="col-lg-6">
+                        <p><strong>Thương hiệu Nông Trại Nấm Xanh</strong> (thuộc Công ty TNHH Agrikgai) ra đời vào cuối năm 2018, chuyên nuôi trồng các loại nấm, trực tiếp sản xuất và đóng gói thành phẩm...</p>
+                        <p>Hiện nay, chúng tôi là một Nhà Cung Cấp uy tín cho nhiều đơn vị lớn từ chuỗi nhà hàng, siêu thị, cửa hàng tiện lợi đến các máy lớn có tên tuổi VN...</p>
+                        <p>Cam kết của Nấm Xanh chính là <strong>"PHỤC VỤ TẬN TÂM - CHĂM SÓC TẬN TÌNH - HỖ TRỢ HẾT MÌNH"</strong>. Chúng tôi luôn phục vụ khách hàng bằng tất cả trái tim.</p>
+                    </div>
+                    <div class="col-lg-6 image-container">
+                        <img src="image/tphcm-trai-nam-xanh-long-an.jpg" alt="Hình ảnh nông trại">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
 </section>
 <section>
     <div class="row">
