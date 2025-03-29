@@ -1,6 +1,8 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="jakarta.tags.fmt" %>
-<%@ page import="Models.Products.Products" %><%--
+<%@ page import="Models.Products.Products" %>
+<%@ page import="Models.Feedback.Feedback" %>
+<%@ page import="java.util.List" %><%--
   Created by IntelliJ IDEA.
   User: airm2
   Date: 16/12/2024
@@ -32,6 +34,588 @@
     .row-item:hover .badge {
         background-color: #ff9800; /* Đổi màu */
     }
+    .zoomable:hover {
+        transform: scale(1.2);
+    }
+
+    /* Căn chỉnh ảnh nhỏ */
+    .thumbnail {
+        width: 120px;
+        cursor: pointer;
+        transition: transform 0.2s ease;
+    }
+
+    /* Hiệu ứng phóng to nhẹ khi hover ảnh nhỏ */
+    .thumbnail:hover {
+        transform: scale(1.1);
+    }
+    .image-container {
+        position: relative;
+        width: 450px;
+        height: auto;
+    }
+
+    /* Ảnh chính */
+    .zoomable {
+        width: 100%;
+        display: block;
+    }
+
+    navbar {
+        background-color: #f4e3ca;
+        transition: all 0.4s ease-in-out;
+        padding: 10px 0;
+    }
+
+    /* Navbar khi cuộn trang */
+    .navbar-scrolled {
+        background-color: rgba(247, 225, 195, 0.9);
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    /* Logo */
+    .navbar-brand {
+        font-weight: bold;
+        color: #6b3e2e;
+        transition: all 0.3s;
+    }
+
+    .navbar-brand:hover {
+        color: #a34d2f;
+    }
+
+    /* Menu link */
+    .navbar-nav .nav-link {
+        color: #333;
+        font-weight: 500;
+        position: relative;
+        transition: all 0.3s;
+    }
+
+    .navbar-nav .nav-link:hover {
+        color: #a34d2f;
+    }
+
+    /* Hiệu ứng gạch dưới khi hover */
+    .navbar-nav .nav-link::after {
+        content: "";
+        display: block;
+        width: 0;
+        height: 2px;
+        background: #a34d2f;
+        transition: width 0.3s;
+    }
+
+    .navbar-nav .nav-link:hover::after {
+        width: 100%;
+    }
+
+    .border-dashed {
+        border-style: dashed !important;
+    }
+    body {
+        background-color: #f8f9fa;
+    }
+    .product-img:hover {
+        transform: scale(1.1);
+        transition: 0.3s ease-in-out;
+    }
+    .card:hover {
+        box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.2);
+        transition: 0.3s;
+    }
+    .btn-primary {
+        background-color: #a0522d;
+        border-color: #a0522d;
+    }
+    .btn-primary:hover {
+        background-color: #8b4513;
+        border-color: #8b4513;
+    }
+    footer {
+
+        color: #ddd;
+        font-family: 'Poppins', sans-serif;
+    }
+
+    footer h5 {
+        color: #f46f1c;
+        font-weight: bold;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+    }
+
+    footer a {
+        color: #bbb;
+        transition: color 0.3s ease, transform 0.3s ease;
+    }
+
+    footer a:hover {
+        color: #f8c471;
+        transform: translateX(3px);
+    }
+
+    footer .social-icons a {
+        display: inline-block;
+        transition: transform 0.3s ease, filter 0.3s ease;
+    }
+
+    footer .social-icons a:hover {
+        transform: scale(1.1);
+        filter: brightness(1.2);
+    }
+
+    footer hr {
+        border-top: 1px solid rgba(255, 255, 255, 0.2);
+    }
+
+    footer .payments {
+        filter: brightness(0.8);
+        transition: filter 0.3s ease;
+    }
+
+    footer .payments:hover {
+        filter: brightness(1);
+    }
+    .social-icons {
+        position: fixed;
+        right: 10px;
+        top: 50%;
+        transform: translateY(-50%);
+        z-index: 1000;
+    }
+    .social-icons a {
+        display: block;
+        margin-bottom: 10px;
+        padding: 10px;
+        color: white;
+        text-align: center;
+        width: 40px;
+        border-radius: 5px;
+    }
+    .nav-tabs .nav-link {
+        color: black;
+        transition: color 0.3s ease-in-out, background-color 0.3s;
+    }
+    .nav-tabs .nav-link:hover {
+        color: #e31919;
+    }
+    .nav-tabs .nav-link.active {
+        color: white;
+        background-color: #B0501D;
+        border-radius: 5px;
+    }
+
+    /* Bảng hiển thị thông tin */
+    .table-bordered {
+        border-radius: 8px;
+        overflow: hidden;
+        box-shadow: 0px 3px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    /* Hiệu ứng mượt mà khi chuyển tab */
+    .tab-pane {
+        opacity: 0;
+        transform: translateY(10px);
+        transition: opacity 0.5s ease, transform 0.5s ease;
+    }
+    .tab-pane.show {
+        opacity: 1;
+        transform: translateY(0);
+    }
+    .product-card {
+        position: relative;
+        overflow: hidden;
+        height: 450px;
+        margin-top: 15px;
+
+    }
+
+    /* css san pham*/
+    .product-image {
+        position: relative;
+        width: 100%;
+        height: 300px; /* Đặt chiều cao cố định cho container */
+
+    }
+
+    .main-image, .hover-image {
+        width: 100%;
+        height: 100%;
+        object-fit: cover; /* Đảm bảo hình ảnh không bị méo */
+        position: absolute;
+        top: 0;
+        left: 0;
+        transition: opacity 0.5s ease-in-out;
+
+    }
+    .hover-image {
+        position: absolute;
+        top: 0;
+        left: 0;
+        opacity: 0;
+
+    }
+
+    .product-image:hover .hover-image {
+        opacity: 1;
+    }
+
+    .product-image:hover .main-image {
+        opacity: 0;
+    }
+    .category-button {
+        transition: transform 0.2s ease, color 0.2s ease;
+    }
+
+    .category-button img {
+        transition: transform 0.2s ease;
+    }
+
+    /* Hiệu ứng hover */
+    .category-button:hover {
+        color: #ff5733; /* Màu chữ khi di chuột vào */
+    }
+
+    .category-button:hover img {
+        transform: scale(1.1); /* Phóng to ảnh nhẹ */
+    }
+
+    /* Hiệu ứng khi nút được chọn */
+    .category-button.active {
+        color: rgb(249, 44, 2);
+        background-color: #ff5733; /* Nền cam */
+        border-radius: 8px;
+        padding: 5px 10px;
+    }
+    .star-rating i {
+        color: gold;
+        font-size: 20px;
+    }
+
+    .product-icons {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        display: flex;
+        gap: 10px;
+        opacity: 0;
+        transition: opacity 0.3s ease, transform 0.3s ease;
+        pointer-events: none; /* Đảm bảo không bị cản trở */
+    }
+    .product-image:hover .product-icons {
+        opacity: 1;
+        transform: translate(-50%, -40%);
+        pointer-events: auto; /* Bật lại khi hover */
+    }
+    .product-icons i {
+        background: white;
+        padding: 10px;
+        border-radius: 50%;
+        font-size: 18px;
+        color: #333;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+        cursor: pointer;
+        transition: background 0.3s ease, transform 0.3s ease;
+    }
+
+    .product-icons i:hover {
+        background: #f8b400;
+        color: white;
+        transform: scale(1.1);
+    }
+
+    .product-image:hover .product-icons {
+        opacity: 1;
+        transform: translate(-50%, -40%);
+    }
+    .product-options {
+        margin-top: 10px;
+    }
+
+    .product-options label {
+        display: inline-block;
+        padding: 5px 10px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        cursor: pointer;
+        margin: 5px;
+        transition: all 0.3s ease;
+    }
+
+    .product-options input {
+        display: none; /* Ẩn radio mặc định */
+    }
+
+    .product-options label:hover,
+    .product-options input:checked + label {
+        background-color: #f8b400;
+        color: white;
+        border-color: #f8b400;
+    }
+    .section-title {
+        color: #c44d2d;
+        font-weight: bold;
+    }
+    .feature-item {
+        display: flex;
+        align-items: center;
+        gap: 15px;
+        margin-bottom: 20px;
+    }
+    .feature-item i {
+        font-size: 24px;
+        color: #000;
+    }
+    /* end css sp*/
+    .icon {
+        filter: grayscale(100%); /* Mặc định là xám */
+        transition: filter 0.3s ease-in-out;
+    }
+
+    .icon:hover {
+        filter: grayscale(0%); /* Khi hover sẽ trở về màu gốc */
+    }
+
+    .navbar {
+        background-color: #f4dab3;
+        transition: all 0.4s ease-in-out;
+        padding: 10px 0;
+        margin-bottom: 50px;
+    }
+
+    /* Navbar khi cuộn trang */
+    .navbar-scrolled {
+        background-color: rgba(247, 225, 195, 0.9);
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    /* Logo */
+    .navbar-brand {
+        font-weight: bold;
+        color: #6b3e2e;
+        transition: all 0.3s;
+    }
+
+    .navbar-brand:hover {
+        color: #a34d2f;
+    }
+
+    /* Menu link */
+    .navbar-nav .nav-link {
+        color: #333;
+        font-weight: 500;
+        position: relative;
+        transition: all 0.3s;
+    }
+
+    .navbar-nav .nav-link:hover {
+        color: #a34d2f;
+    }
+
+    /* Hiệu ứng gạch dưới khi hover */
+    .navbar-nav .nav-link::after {
+        content: "";
+        display: block;
+        width: 0;
+        height: 2px;
+        background: #a34d2f;
+        transition: width 0.3s;
+    }
+
+    .navbar-nav .nav-link:hover::after {
+        width: 100%;
+    }
+
+    /* Dropdown */
+    .dropdown-menu {
+        background-color: #fdf3e5;
+        border-radius: 5px;
+        animation: fadeIn 0.3s ease-in-out;
+    }
+
+    .dropdown-item {
+        transition: background-color 0.3s ease-in-out;
+    }
+
+    .dropdown-item:hover {
+        background-color: #e8c6a7;
+    }
+
+    /* Giỏ hàng */
+    .cart-icon {
+        position: relative;
+        font-size: 1.2rem;
+        transition: transform 0.3s;
+    }
+
+    .cart-icon:hover {
+        transform: scale(1.1);
+    }
+
+    .cart-badge {
+        position: absolute;
+        top: -5px;
+        right: -10px;
+        background: red;
+        color: white;
+        font-size: 12px;
+        padding: 3px 6px;
+        border-radius: 50%;
+    }
+
+    /* Nút tìm kiếm và user */
+    .search-icon, .user-icon {
+        font-size: 1.2rem;
+        transition: transform 0.3s;
+    }
+
+    .search-icon:hover, .user-icon:hover {
+        transform: scale(1.2);
+    }
+
+    /* Hiệu ứng fade-in */
+    @keyframes fadeIn {
+        from { opacity: 0; transform: translateY(-10px); }
+        to { opacity: 1; transform: translateY(0); }
+    }
+    .category-title {
+        text-align: center;
+
+        color: #e18456;
+    }
+
+    .rating-bar {
+        height: 10px;
+        background-color: #eee;
+        border-radius: 5px;
+        overflow: hidden;
+    }
+    .rating-fill {
+        height: 100%;
+        background-color: #f90;
+    }
+    .star {
+        color: #f90;
+    }
+    .rating-text {
+        font-size: 14px;
+    }
+    .review-container {
+        max-width: 700px;
+        margin: 30px auto;
+    }
+    .review-item {
+        background: #fff;
+        padding: 15px;
+        border-radius: 10px;
+        box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+        margin-bottom: 15px;
+    }
+    .review-name {
+        font-weight: bold;
+        color: #333;
+        font-size: 16px;
+    }
+    .verified-badge {
+        color: #28a745;
+        font-size: 14px;
+    }
+    .text-warning i {
+        color: #ffc107;
+    }
+    .review-text {
+        font-size: 15px;
+        color: #555;
+    }
+    .review-actions {
+        display: flex;
+        align-items: center;
+        font-size: 14px;
+        color: #777;
+    }
+    .review-actions i {
+        cursor: pointer;
+        margin-right: 5px;
+    }
+    .review-actions a {
+        text-decoration: none;
+        color: #007bff;
+        margin-left: 10px;
+    }
+    .review-actions span {
+        margin-left: auto;
+    }
+    .delivery-container {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 30px;
+    }
+    .delivery-text {
+        max-width: 600px;
+    }
+    .delivery-text h5 {
+        font-weight: bold;
+    }
+    .delivery-text ul {
+        padding-left: 20px;
+    }
+    .content-section {
+        padding: 50px 0;
+    }
+    .image-container img {
+        border-radius: 10px;
+        width: 100%;
+        height: auto;
+    }
+    .category-item {
+        cursor: pointer;
+        transition: background-color 0.3s ease, font-weight 0.3s ease, box-shadow 0.3s ease, transform 0.2s ease;
+        border-bottom: 1px dashed rgb(238, 48, 48);
+
+    }
+    .category-item:hover {
+        box-shadow: 0 4px 8px rgba(232, 33, 33, 0.2);
+        transform: translateY(-2px);
+        background:linear-gradient(90deg, #ebee95, #f29a5c);
+        border-radius: 10px;
+    }
+    .category-item.selected {
+        background-color: #dee2e6;
+        font-weight: bold;
+    }
+
+
+    .btn-outline-dark {
+        position: relative;
+        overflow: hidden;
+        transition: all 0.5s ease-in-out;
+    }
+
+    .btn-outline-dark:hover {
+        background: linear-gradient(45deg, #ffe6d5, #f07025);
+        color: #fff;
+        box-shadow: 0 0 15px rgba(237, 19, 4, 0.6);
+        transform: translateY(-2px); /* Nhẹ nhàng hơn thay vì scale */
+    }
+
+    .btn-outline-dark::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 100%;
+        background: rgba(255, 255, 255, 0.2);
+        transition: left 0.5s ease-in-out;
+    }
+
+    .btn-outline-dark:hover::before {
+        left: 100%;
+    }
+
 </style>
 <body>
 <%@include file="header.jsp"%>
@@ -471,79 +1055,49 @@
                     </div>
                 </div>
                 <hr>
+
                 <div class="container mt-4" id="review">
-                    <div class="review-item" id="review-list">
-                        <p class="review-name">Lệ An Anh 036667***
-                            <span class="verified-badge">
-                                    <i class="fas fa-check-circle"></i> Đã mua hàng tại Nấm Xanh
-                                </span>
-                        </p>
-                        <p class="text-warning">
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                        </p>
-                        <p class="review-text">Lần đầu trải nghiệm mua nấm online, cảm tình là tư vấn tận tình, lịch sự, giao nhanh đúng đủ. Sản phẩm thì ổn, mới và ngon...</p>
-                        <div class="review-actions">
-                            <i class="far fa-thumbs-up"></i> 0
-                            <i class="far fa-thumbs-down"></i> 0
-                            <a href="#">Trả lời</a>
-                            <a href="#">2 thích</a>
-                            <span>• 02/05/2024</span>
-                        </div>
-                    </div>
+                    <%
+                        List<Feedback> feedbacks = (List<Feedback>) session.getAttribute("feedbacks");
+                        System.out.println(feedbacks.size() + "Size feedback");
+                    %>
+                    <c:forEach var="item" items="${sessionScope.feedbacks}">
+                        <div class="review-item" id="review-list">
+                            <p class="review-name">${item.userName} ${item.phoneNumber}
+                                <span class="verified-badge"><i class="fas fa-check-circle"></i> Đã mua hàng tại Nấm Xanh</span>
+                            </p>
 
-                    <div class="review-item" id="review-list">
-                        <p class="review-name">Chu Han 0397997*** <span class="verified-badge"><i class="fas fa-check-circle"></i> Đã mua hàng tại Nấm Xanh</span></p>
-                        <p class="text-warning">
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                        </p>
-                        <p class="review-text">Nấm ngon và tươi mới như mô tả, shop tư vấn nhiệt tình, ưng ý sẽ quay lại</p>
-                        <div class="review-tags">
-                            <span>Đóng gói chỉnh chu</span>
-                            <span>Nấm trông ngon sạch</span>
-                            <span>Hỗ trợ nhanh chóng</span>
-                            <span>Tư vấn nhiệt tình</span>
-                            <span>Shipper rất thân thiện</span>
-                            <span>Giao hàng nhanh chóng</span>
-                        </div>
-                        <div class="review-actions">
-                            <i class="far fa-thumbs-up"></i> 0
-                            <i class="far fa-thumbs-down"></i> 0
-                            <a href="#">Trả lời</a>
-                            <a href="#">3 thích</a>
-                            <span>• 05/03/2024</span>
-                        </div>
-                    </div>
+                            <p class="text-warning">
+                               
+                                <c:forEach begin="1" end="${item.ratingRank}">
+                                    <i class="fas fa-star"></i>
+                                </c:forEach>
 
-                    <div class="review-item">
-                        <p class="review-name">Tâm NTM 0337786*** <span class="verified-badge"><i class="fas fa-check-circle"></i> Đã mua hàng tại Nấm Xanh</span></p>
-                        <p class="text-warning">
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                        </p>
-                        <p class="review-text">Nấm tươi ngon mới, đóng gói đẹp, ưng</p>
-                        <div class="review-tags">
-                            <span>Đóng gói chỉnh chu</span>
-                            <span>Giao nhanh chóng</span>
+
+                                <c:forEach begin="${item.ratingRank + 1}" end="5">
+                                    <i class="far fa-star"></i>
+                                </c:forEach>
+                            </p>
+
+                            <p class="review-text">${item.status}</p>
+                            <div class="review-tags">
+                                <span>${item.comment}</span>
+                            </div>
+
+                            <div class="review-actions">
+                                <i class="far fa-thumbs-up"></i> 0
+                                <i class="far fa-thumbs-down"></i> 0
+                                <a href="#">Trả lời</a>
+                                <a href="#">3 thích</a>
+                                <span>• ${item.createDate}</span>
+                            </div>
                         </div>
-                        <div class="review-actions">
-                            <i class="far fa-thumbs-up"></i> 0
-                            <i class="far fa-thumbs-down"></i> 0
-                            <a href="#">Trả lời</a>
-                            <a href="#">3 thích</a>
-                            <span>• 29/10/2023</span>
-                        </div>
-                    </div>
+                    </c:forEach>
+
+
+
+
+
                 </div>
 
             </div>
