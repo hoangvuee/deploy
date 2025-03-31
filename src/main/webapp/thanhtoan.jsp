@@ -394,15 +394,15 @@
                         <input type="email" class="form-control" id="email" name="email" placeholder="Nhập email (tùy chọn)">
                       </div>
                       <div class="row">
-                        <!-- Tỉnh/Thành phố -->
+                        <!-- Chọn tỉnh/thành phố -->
                         <div class="col-md-6 mb-3">
                           <label for="province" class="form-label">Tỉnh/Thành Phố *</label>
                           <select class="form-select" id="province" name="province">
-                            <option value="">Chọn một tỉnh/thành phố...</option>
+                            <option value="">Chọn một tùy chọn...</option>
                           </select>
                         </div>
 
-                        <!-- Quận/Huyện -->
+                        <!-- Chọn quận/huyện -->
                         <div class="col-md-6 mb-3">
                           <label for="district" class="form-label">Quận/Huyện *</label>
                           <select class="form-select" id="district" name="district">
@@ -410,7 +410,7 @@
                           </select>
                         </div>
 
-                        <!-- Phường/Xã -->
+                        <!-- Chọn phường/xã -->
                         <div class="col-md-6 mb-3">
                           <label for="ward" class="form-label">Phường/Xã *</label>
                           <select class="form-select" id="ward" name="ward">
@@ -419,6 +419,10 @@
                         </div>
                       </div>
 
+                      <!-- Ẩn các input để gửi giá trị tên (text) -->
+                      <input type="hidden" id="province_name" name="province_name" value="">
+                      <input type="hidden" id="district_name" name="district_name" value="">
+                      <input type="hidden" id="ward_name" name="ward_name" value="">
 
 
                       <div class="mb-3">
@@ -632,6 +636,7 @@
 </div>
 <script>
   // Hàm tải tỉnh/thành phố từ API
+  // Hàm tải tỉnh/thành phố từ API
   async function loadProvinces() {
     const response = await fetch('https://esgoo.net/api-tinhthanh/1/0.htm');
     const data = await response.json();
@@ -644,9 +649,7 @@
       });
     }
   }
-  fetch('https://esgoo.net/api-tinhthanh/2/1.htm')
-          .then(response => response.json())
-          .then(data => console.log(data));
+
   // Hàm tải quận/huyện theo tỉnh/thành phố
   async function loadDistricts(provinceID) {
     const districtSelect = document.getElementById('district');
@@ -659,24 +662,21 @@
     if (!provinceID) return;
 
     try {
-      // Nối chuỗi để tạo URL
       const url = 'https://esgoo.net/api-tinhthanh/2/' + provinceID + '.htm';
       const response = await fetch(url);
       const data = await response.json();
-      console.log("Dữ liệu quận/huyện:", data); // Kiểm tra dữ liệu API
 
       if (data.error === 0 && data.data) {
         data.data.forEach(district => {
           let option = new Option(district.full_name, district.id);
           districtSelect.add(option);
         });
-      } else {
-        console.warn("Không có dữ liệu quận/huyện!");
       }
     } catch (error) {
       console.error("Lỗi tải quận/huyện:", error);
     }
   }
+
   // Hàm tải phường/xã theo quận/huyện
   async function loadWards(districtID) {
     const wardSelect = document.getElementById('ward');
@@ -684,7 +684,6 @@
 
     if (!districtID) return;
 
-    // Cộng chuỗi để xây dựng URL
     const url = 'https://esgoo.net/api-tinhthanh/3/' + districtID + '.htm';
     const response = await fetch(url);
     const data = await response.json();
@@ -703,14 +702,26 @@
   // Khi chọn tỉnh/thành phố
   document.getElementById('province').addEventListener('change', function () {
     const provinceID = this.value;
+    const provinceName = this.options[this.selectedIndex].text; // Lấy tên tỉnh/thành phố
+    document.getElementById('province_name').value = provinceName; // Cập nhật giá trị vào input ẩn
     loadDistricts(provinceID);
   });
 
   // Khi chọn quận/huyện
   document.getElementById('district').addEventListener('change', function () {
     const districtID = this.value;
+    const districtName = this.options[this.selectedIndex].text; // Lấy tên quận/huyện
+    document.getElementById('district_name').value = districtName; // Cập nhật giá trị vào input ẩn
     loadWards(districtID);
   });
+
+  // Khi chọn phường/xã
+  document.getElementById('ward').addEventListener('change', function () {
+    const wardID = this.value;
+    const wardName = this.options[this.selectedIndex].text; // Lấy tên phường/xã
+    document.getElementById('ward_name').value = wardName; // Cập nhật giá trị vào input ẩn
+  });
+
 </script>
 
 
