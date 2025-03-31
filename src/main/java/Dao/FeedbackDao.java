@@ -2,10 +2,7 @@ package Dao;
 
 import Models.Feedback.Feedback;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -45,7 +42,52 @@ public class FeedbackDao {
         }
         return feedbackList;
     }
+    public int getIdOrderDetails(String idOrder, String idProduct) {
+        String sql = "SELECT order_details.id " +
+                "FROM order_details " +
+                "INNER JOIN orders ON orders.id = order_details.idOrder " +
+                "WHERE orders.id = ? AND order_details.idProduct = ?;";
 
+        int id = -1; // Default value to indicate no result
+        try (Connection conn = con.getConn();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+
+            stmt.setString(1, idOrder);
+            stmt.setString(2, idProduct);
+
+            try (ResultSet rs = stmt.executeQuery()) {
+                // Kiểm tra nếu có kết quả trả về
+                if (rs.next()) {
+                    id = rs.getInt(1); // Lấy giá trị từ cột đầu tiên
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return id;
+    }
+    public void insertReview(String comment,  int idOrderDetail, int ratingRank, String status) {
+        String sql = "INSERT INTO feedbacks (comment, create_date, id_order_detail, rating_rank, status) VALUES (?, ?, ?, ?, ?)";
+
+        try (Connection conn = con.getConn();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+
+            stmt.setString(1, comment);
+            stmt.setDate(2, new java.sql.Date(System.currentTimeMillis())); // Chuyển đổi từ java.util.Date sang java.sql.Date
+            stmt.setInt(3, idOrderDetail);
+            stmt.setInt(4, ratingRank);
+            stmt.setString(5, status);
+
+            int rowsInserted = stmt.executeUpdate();
+            if (rowsInserted > 0) {
+                System.out.println("Thêm đánh giá thành công!");
+            } else {
+                System.out.println("Thêm đánh giá thất bại.");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
     public static void main(String[] args) {
         FeedbackDao f = new FeedbackDao();
         System.out.println(f.getFeedbacksByProductId(62).toString());
