@@ -27,6 +27,9 @@
 
   <!-- Bootstrap core CSS -->
   <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+  <script src="https://esgoo.net/scripts/jquery.js"></script>
 
 
   <link rel="stylesheet" href="css/fontawesome.css">
@@ -204,7 +207,10 @@
     box-shadow: 2px 4px 8px rgba(0, 0, 0, 0.1);
     position: relative;
   }
-
+  select {
+    max-height: 300px; /* Giới hạn chiều cao */
+    overflow-y: auto;  /* Hiện thanh cuộn khi dài quá */
+  }
   .shipping-option:hover {
     background: #f3e5ff; /* Màu nhạt tím */
     border-color: #616161;
@@ -388,23 +394,31 @@
                         <input type="email" class="form-control" id="email" name="email" placeholder="Nhập email (tùy chọn)">
                       </div>
                       <div class="row">
+                        <!-- Tỉnh/Thành phố -->
                         <div class="col-md-6 mb-3">
-                          <label for="city" class="form-label">Tỉnh/Thành Phố *</label>
-                          <select class="form-select" id="city" name="city" onchange="updateDistricts()">
-                            <option value="">Chọn một tùy chọn...</option>
-                            <option value="Hà Nội">Hà Nội</option>
-                            <option value="Hồ Chí Minh">Hồ Chí Minh</option>
-                            <option value="Đà Nẵng">Đà Nẵng</option>
-                            <option value="Cần Thơ">Cần Thơ</option>
+                          <label for="province" class="form-label">Tỉnh/Thành Phố *</label>
+                          <select class="form-select" id="province" name="province">
+                            <option value="">Chọn một tỉnh/thành phố...</option>
                           </select>
                         </div>
+
+                        <!-- Quận/Huyện -->
                         <div class="col-md-6 mb-3">
                           <label for="district" class="form-label">Quận/Huyện *</label>
                           <select class="form-select" id="district" name="district">
                             <option value="">Chọn quận/huyện...</option>
                           </select>
                         </div>
+
+                        <!-- Phường/Xã -->
+                        <div class="col-md-6 mb-3">
+                          <label for="ward" class="form-label">Phường/Xã *</label>
+                          <select class="form-select" id="ward" name="ward">
+                            <option value="">Chọn phường/xã...</option>
+                          </select>
+                        </div>
                       </div>
+
 
 
                       <div class="mb-3">
@@ -616,6 +630,88 @@
 <div style=" background-color: #f3eee7;  height: 450px">
   <%@include file="footer.jsp"%>
 </div>
+<script>
+  // Hàm tải tỉnh/thành phố từ API
+  async function loadProvinces() {
+    const response = await fetch('https://esgoo.net/api-tinhthanh/1/0.htm');
+    const data = await response.json();
+    const provinceSelect = document.getElementById('province');
+
+    if (data.error === 0) {
+      data.data.forEach(province => {
+        let option = new Option(province.full_name, province.id);
+        provinceSelect.add(option);
+      });
+    }
+  }
+  fetch('https://esgoo.net/api-tinhthanh/2/1.htm')
+          .then(response => response.json())
+          .then(data => console.log(data));
+  // Hàm tải quận/huyện theo tỉnh/thành phố
+  async function loadDistricts(provinceID) {
+    const districtSelect = document.getElementById('district');
+    const wardSelect = document.getElementById('ward');
+
+    // Reset quận/huyện và phường/xã
+    districtSelect.innerHTML = '<option value="">Chọn quận/huyện...</option>';
+    wardSelect.innerHTML = '<option value="">Chọn phường/xã...</option>';
+
+    if (!provinceID) return;
+
+    try {
+      // Nối chuỗi để tạo URL
+      const url = 'https://esgoo.net/api-tinhthanh/2/' + provinceID + '.htm';
+      const response = await fetch(url);
+      const data = await response.json();
+      console.log("Dữ liệu quận/huyện:", data); // Kiểm tra dữ liệu API
+
+      if (data.error === 0 && data.data) {
+        data.data.forEach(district => {
+          let option = new Option(district.full_name, district.id);
+          districtSelect.add(option);
+        });
+      } else {
+        console.warn("Không có dữ liệu quận/huyện!");
+      }
+    } catch (error) {
+      console.error("Lỗi tải quận/huyện:", error);
+    }
+  }
+  // Hàm tải phường/xã theo quận/huyện
+  async function loadWards(districtID) {
+    const wardSelect = document.getElementById('ward');
+    wardSelect.innerHTML = '<option value="">Chọn phường/xã...</option>';
+
+    if (!districtID) return;
+
+    // Cộng chuỗi để xây dựng URL
+    const url = 'https://esgoo.net/api-tinhthanh/3/' + districtID + '.htm';
+    const response = await fetch(url);
+    const data = await response.json();
+
+    if (data.error === 0) {
+      data.data.forEach(ward => {
+        let option = new Option(ward.full_name, ward.id);
+        wardSelect.add(option);
+      });
+    }
+  }
+
+  // Khi trang tải, tải tỉnh/thành phố
+  loadProvinces();
+
+  // Khi chọn tỉnh/thành phố
+  document.getElementById('province').addEventListener('change', function () {
+    const provinceID = this.value;
+    loadDistricts(provinceID);
+  });
+
+  // Khi chọn quận/huyện
+  document.getElementById('district').addEventListener('change', function () {
+    const districtID = this.value;
+    loadWards(districtID);
+  });
+</script>
 
 
 <script>
@@ -643,31 +739,12 @@
 
 
   }
+  fetch('https://esgoo.net/api-tinhthanh/1/0.htm')
+          .then(response => response.json())
+          .then(data => console.log(data));
 
-  const districts = {
-    'Hà Nội': ['Ba Đình', 'Hoàn Kiếm', 'Đống Đa', 'Cầu Giấy', 'Thanh Xuân'],
-    'Hồ Chí Minh': ['Quận 1', 'Quận 2', 'Quận 3', 'Quận 4', 'Quận 7'],
-    'Đà Nẵng': ['Hải Châu', 'Liên Chiểu', 'Sơn Trà', 'Ngũ Hành Sơn', 'Cẩm Lệ'],
-    'Cần Thơ': ['Ninh Kiều', 'Bình Thủy', 'Cái Răng', 'Ô Môn', 'Thới Lai']
-  };
 
-  function updateDistricts() {
-    const city = document.getElementById('city').value;
-    const districtSelect = document.getElementById('district');
 
-    // Clear the current options
-    districtSelect.innerHTML = '<option value="">Chọn quận/huyện...</option>';
-
-    if (city !== '') {
-      const districtsList = districts[city];
-      districtsList.forEach(district => {
-        const option = document.createElement('option');
-        option.value = district;
-        option.text = district;
-        districtSelect.add(option);
-      });
-    }
-  }
   let productTotal = parseFloat(<%= cart.getTotalPrice() %>); // Tổng tiền sản phẩm
 
   function updateShippingCost(radio) {
@@ -686,8 +763,13 @@
       currency: "VND",
     }).format(total);
   }
+
+
+
 </script>
+
 </body>
+
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 <script src="js/scripthanhtoan.js"></script>
 </html>
