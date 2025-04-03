@@ -403,7 +403,7 @@ ConnDB dao = new ConnDB();
                     user.setActive(rs.getBoolean("isActive"));
                     user.setIdRole(rs.getInt("idRole"));
                     user.setImage(rs.getString("image"));
-                    user.setGoogle(rs.getBoolean("isGoogle"));
+                  //  user.setGoogle(rs.getBoolean("isGoogle"));
                     return user;
                 }
             }

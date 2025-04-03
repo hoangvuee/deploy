@@ -139,7 +139,7 @@
                 <div class="text-center mt-3">
                     <p>hoặc đăng nhập bằng</p>
                     <div class="social-buttons">
-                        <img src="../img/vector-blue-social-media-logo_1080184-225.jpg.avif" alt="Facebook">
+                      <a href="${pageContext.request.contextPath}/facebook-login">  <img src="../img/vector-blue-social-media-logo_1080184-225.jpg.avif" alt="Facebook"></a>
                         <a href="#" id="loginBtn">
                             <img src="../img/Google_Icons-09-512.webp" alt="Google">
                         </a>
