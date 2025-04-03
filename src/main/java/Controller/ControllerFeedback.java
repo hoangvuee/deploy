@@ -14,6 +14,7 @@ public class ControllerFeedback extends HttpServlet {
     private ServiceFeedback serviceFeedback = new ServiceFeedback();
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        System.out.println("có vào from khong");
         // Lấy thông tin từ form
         String productId = req.getParameter("productId");
         String orderId = req.getParameter("orderId");

@@ -428,8 +428,10 @@
     <div class="modal-content">
         <span class="close" onclick="closeModal()">&times;</span>
         <h2>Đánh giá sản phẩm</h2>
-        <form id="ratingForm" action="feedbacks" method="post">
+        <form id="ratingForm" action="${pageContext.request.contextPath}/feedbacks" method="post">
             <input type="hidden" id="productId" name="productId">
+            <input type="hidden" id="orderId" name="orderId"> <!-- Thêm input ẩn cho orderId -->
+
             <div class="form-group">
                 <label for="status">Trạng thái:</label>
                 <select id="status" name="status">
@@ -446,7 +448,7 @@
                 <label for="stars">Đánh giá:</label>
                 <input type="number" id="stars" name="stars" min="1" max="5" placeholder="Số sao (1-5)" required>
             </div>
-            <button type="button" onclick="submitRating()">Gửi đánh giá</button>
+            <button type="submit">Gửi đánh giá</button>
         </form>
     </div>
 </div>
@@ -489,9 +491,11 @@
                             '<span class="product-name"><strong>Tên sản phẩm:</strong> ' + product.nameProduct + '</span>' +
                             '<span class="product-quantity"><strong>Số lượng:</strong> ' + product.quantity + '</span>' +
                             // Thêm phần đánh giá với nút để mở modal
-                            '<button onclick="openRatingForm(' + product.idProduct + ')">Đánh giá</button>' +
+                            '<button onclick="openRatingForm(' + product.idProduct + ', \'' + idOrder + '\')">Đánh giá</button>' +  // Đảm bảo orderId là giá trị, không phải đối tượng
                             '</div>' +
                             '</li>';
+
+
 
 
                     }).join('');  // join() để gộp các phần tử mảng thành một chuỗi
@@ -514,9 +518,10 @@
             detailSection.classList.remove('active');
         });
     });
-    function openRatingForm(productId) {
-        document.getElementById('productId').value = productId;
-        document.getElementById('ratingModal').style.display = 'block';
+    function openRatingForm(productId, orderId) {
+        document.getElementById('productId').value = productId; // Gán productId vào form
+        document.getElementById('orderId').value = orderId; // Gán orderId vào form
+        document.getElementById('ratingModal').style.display = 'block'; // Mở modal
     }
 
     // Hàm đóng modal
