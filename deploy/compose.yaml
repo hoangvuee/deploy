@@ -1,0 +1,44 @@
+
+
+services:
+  # MySQL service
+  mysql:
+    image: mysql:8
+    container_name: mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: root_password        # Mật khẩu root của MySQL
+      MYSQL_DATABASE: DataWeb                   # Tên cơ sở dữ liệu
+    ports:
+      - "3306:3306"                             # Mở cổng MySQL ra ngoài
+    volumes:
+      - ./init-db:/docker-entrypoint-initdb.d   # Đảm bảo dữ liệu được khôi phục từ dump.sql
+    networks:
+      - webnet
+
+  # Redis service
+  redis:
+    image: redis:latest
+    container_name: redis
+    ports:
+      - "6380:6379"                             # Mở cổng Redis ra ngoài
+    environment:
+      - REDIS_PASSWORD=65906590                # Nếu Redis yêu cầu mật khẩu
+    networks:
+      - webnet
+
+  # Web application service
+  web:
+    build:
+      context: .                                # Dockerfile nằm trong thư mục gốc của dự án
+    container_name: webapp
+    ports:
+      - "8080:8080"                            # Mở cổng của ứng dụng web
+    depends_on:
+      - mysql                                   # Đảm bảo MySQL khởi động trước
+      - redis                                   # Đảm bảo Redis khởi động trước
+    networks:
+      - webnet
+
+networks:
+  webnet:
+    driver: bridge
